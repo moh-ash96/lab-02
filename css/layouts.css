@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 5px;
+}
+#my-select{
+    width: 470px;
+    height: 50px;
+    position: relative;
+    top: 255px;
+    margin-left: 31px;
+    font-size: 24px;
+}
