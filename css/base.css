@@ -1,0 +1,15 @@
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    background-color: rgb(235, 228, 220);
+}
+*, h1, footer {
+    font-family: 'Courgette', cursive;
+    margin: 5px;
+    
+}
+footer{
+    clear: both;
+    text-align: center;
+    font-size: 29px;
+}

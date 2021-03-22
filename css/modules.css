@@ -1,0 +1,22 @@
+#photo-template{
+    /* display: inline-block; */
+    width: 20.33%;
+    float: left;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 35px;
+}
+img{
+    width: 300px;
+    /* float: left; */
+    margin: auto;
+}
+h2{
+    font-size: 45px;
+    margin-bottom: 5px;
+    /* clear: both; */
+}
+p{
+    font-size: 30px;
+    /* clear: both; */
+}
