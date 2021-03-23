@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="css/layouts.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Shadows+Into+Light&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -19,32 +20,49 @@
         <form action="" id="select">
             <select id="my-select">
                 <option value="default" class="option">Filter by Keyword</option>
-                <!-- <option value="narwhal" class="option">Narwhal</option>
-                <option value="rhino" class="option">Rhino</option>
-                <option value="unicorn" class="option">Unicorn</option>
-                <option value="unilego" class="option">Unilego</option>
-                <option value="triceratops" class="option">Triceratops</option>
-                <option value="markhor" class="option">Markhor</option>
-                <option value="mouflon" class="option">Mouflon</option>
-                <option value="addax" class="option">Addax</option>
-                <option value="chameleon" class="option">Chameleon</option>
-                <option value="lizard" class="option">Lizard</option>
-                <option value="dragon" class="option">Dragon</option> -->
             </select>
-
         </form>
+        <nav id="pages">
+            <ul>
+                <li><button id="b1">1</button></li>
+                <li><button id="b2">2</button></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <div id="photo-template">
-            <h2></h2>
-            <img src="" alt="">
-            <p></p>
-        </div>
+        <!-- <section id="picSection">
+            <template id="picTemplate" type ="text/x-tmpl-mustache">
+                <div id="photo-template" class="a">
+                    <h2>{{title}}</h2>
+                    <img src="{{image_url}}" alt="">
+                    <p>{{description}}</p>
+                </div>
+            </template>
+        </section> -->
+        <section id="picSection">
+                <div id="photo-template" class="a">
+                    <h2></h2>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+        </section>
+
+                
+            
+            <div id="photo-template2" class="a2">
+                <h2 id="h2"></h2>
+                <img src="" alt="" id="img2">
+                <p id="p2"></p>
+            </div>
+        
     </main>
     <footer>
         &copy; 2021 Code Fellows
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
     <script src="js/app.js"></script>
 </body>
 
