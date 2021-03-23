@@ -129,9 +129,9 @@ $(document).ready(function () {
 
     $('#my-select').change(function () {
       if ($(this).val() === 'default') {
-        $('.a').show();
+        $('.card-div').show();
       } else {
-        $('.a').hide();
+        $('.card-div').hide();
         $('.' + $(this).val()).show();
       }
     });
@@ -142,9 +142,9 @@ $(document).ready(function () {
 
     $('#my-select').change(function () {
       if ($(this).val() === 'default') {
-        $('.a2').show();
+        $('.card-div2').show();
       } else {
-        $('.a2').hide();
+        $('.card-div2').hide();
         $('.' + $(this).val()).show();
       }
     });
