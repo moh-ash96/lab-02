@@ -6,7 +6,7 @@ h1 {
 #my-select{
     width: 470px;
     height: 50px;
-    position: relative;
+    /* position: relative; */
     top: 255px;
     margin-left: 31px;
     font-size: 24px;
