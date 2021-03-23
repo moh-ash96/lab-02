@@ -4,8 +4,10 @@ let filters = [];
 let selected;
 let horns = [];
 let picId = 1;
+let horns2 = [];
 
 
+let templateId = '#picTemplate';
 function Picture(title, url, desc, keyword, horns) {
     this.title = title;
     this.url = url;
@@ -13,121 +15,138 @@ function Picture(title, url, desc, keyword, horns) {
     this.keyword = keyword;
     this.horns = horns;
     this.id = (picId++);
-    pictures.push(this);
+    // pictures.push(this);
 }
-let pictures=[];
+
+// function Picture(rawDataObject) {
+    
+//     for (let elements in rawDataObject){
+//         this[elements] = rawDataObject[elements];
+//     }
+//     this.id = (picId++);
+//     pictures.push(this);
+// }
+
 
 
 Picture.prototype.render = function () {
     let $picClone = $('#photo-template').clone();
+    $picClone.addClass(`${this.keyword}`)
     $('main').append($picClone);
     $picClone.find('h2').text(this.title);
     $picClone.find('img').attr('src', this.url);
     $picClone.find('p').text(this.desc);
     $picClone.attr('id', this.id);
-    // console.log(this.keyword);
+    
 };
-// console.log(pictures[0].title);
+// Picture.prototype.toHTML = function (){
+//     let template = $(templateId).html();
+//     let html = Mustache.render(template, this);
+//     return html;
+// }
+
+Picture.prototype.render2 = function () {
+    let $picClone = $('#photo-template2').clone();
+    $picClone.addClass(`${this.keyword}`)
+    $('main').append($picClone);
+    $picClone.find('#h2').text(this.title);
+    $picClone.find('#img2').attr('src', this.url);
+    $picClone.find('#p2').text(this.desc);
+    $picClone.attr('id', this.id);
+    
+};
+
+
+const ajaxSettings = {
+    method: 'get',
+    dataType: 'json'
+};
+
+let hornObject = [];
+
+// let pictureDataSet = [];
 
 Picture.readJson = () => {
-    const ajaxSettings = {
-        method: 'get',
-        dataType: 'json'
-    };
 
-    $.ajax('./data/page-1.json', ajaxSettings)
-        .then(data => {
+    // pictureDataSet.push($.ajax('./data/page-1.json', ajaxSettings));
+    $.ajax('./data/page-1.json', ajaxSettings) 
+    .then(data => {
             data.forEach(item => {
-                let hornObject = new Picture(item.title, item.image_url, item.description, item.keyword, item.horns);
+                hornObject = new Picture(item.title, item.image_url, item.description, item.keyword, item.horns);
+                
                 if(filters.includes(item.keyword) === false){
                     filters.push(item.keyword);
                     $('select').append(`<option value="${item.keyword}"> ${item.keyword}></option>`);
                 }
-                hornObject.render();
-                $(`#${hornObject.id}`).css('display', 'inline-block');
                 horns.push(hornObject);
+                hornObject.render();
             });
+            
         });
+        // console.log($.ajax('./data/page-1.json', ajaxSettings));
+        // console.log(ajax1);
+        hornObject = [];
+    };
+
+
+    // pictureDataSet.forEach(pictureObject => {
+    //     pictures.push(new Picture(pictureObject));
+    // });
+
+    // pictures.forEach(ourNewPictureObject => {
+    //     $('#picSection').append(ourNewPictureObject.toHtml());
+    // });
+   
+    $('#b1').click (() => Picture.readJson());
+
+
+// let hornObject2;
+
+Picture.readJson2 = () => {
+    $.ajax('./data/page-2.json', ajaxSettings)
+    .then(data => {
+        data.forEach(item => {
+            hornObject = new Picture(item.title, item.image_url, item.description, item.keyword, item.horns);
+            
+            if(filters.includes(item.keyword) === false){
+                filters.push(item.keyword);
+                $('select').append(`<option value="${item.keyword}"> ${item.keyword}></option>`);
+            }
+            hornObject.render2();
+            
+            horns2.push(hornObject);
+        });
+        // $(`#${hornObject2.id}`).css('display', 'inline-block');
+    });
+    // $('#picSection').empty();
+        
 };
 
-
-$('document').ready(()=>{
-    
-    $(() => Picture.readJson());
-    $('select').change(()=>{
-        let selectedType = $(this).children('option:selected').val();
-
-        horns.forEach(item =>{
-            if (selectedType === item.keyword){
-
-                $(`#${item.id}`).remove();
-                item.render();
-                $(`#${item.id}`).css('display', 'none');
-            }
-            if (selectedType === 'default'){
-                $(`#${item.id}`).remove();
-                item.render();
-                $(`#${item.id}`).css('display', 'inline-block');
-            }
-        })
-    })
-})
+$('#b2').click (() => Picture.readJson2());
 
 
+$(document).ready(function () {
 
+    $('#my-select').change(function () {
+      if ($(this).val() === 'default') {
+        $('.a').show();
+      } else {
+        $('.a').hide();
+        $('.' + $(this).val()).show();
+      }
+    });
+  
+  });
 
+  $(document).ready(function () {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $('#select').click(function (event) {
-//     event.preventDefault();
-//     console.log($("option").value);
-
-
-
-
-
-
-
-//     $('select#my-select').change(function () {
-//         let filter = $(this).val();
-//         filterList(filter);
-//     });
-
-//     // Recruiters filter function
-//     function filterList(value) {
-//         let list = $("#photo-template");
-//         $(list).hide();
-//         if (event.target.value == "default") {
-//             $("#photo-template").find("div").each(function (i) {
-//                 $(this).show();
-//             });
-//         } else {
-//             $(list).hide();
-//             // *=" means that if a data-custom type contains multiple values, it will find them
-//             // $(".recruiter").find("article[data-custom-type*=" + value + "]").each(function (i) {
-//             // 	$(this).show();
-//             // });
-//         }
-//     }
-// })
-
-
-
-
-
-
-
-
+    $('#my-select').change(function () {
+      if ($(this).val() === 'default') {
+        $('.a2').show();
+      } else {
+        $('.a2').hide();
+        $('.' + $(this).val()).show();
+      }
+    });
+  
+});
