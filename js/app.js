@@ -32,7 +32,7 @@ function Picture(title, url, desc, keyword, horns) {
 Picture.prototype.render = function () {
     let $picClone = $('#photo-template').clone();
     $picClone.addClass(`${this.keyword}`)
-    $('main').append($picClone);
+    $('#picSection').append($picClone);
     $picClone.find('h2').text(this.title);
     $picClone.find('img').attr('src', this.url);
     $picClone.find('p').text(this.desc);
@@ -48,7 +48,7 @@ Picture.prototype.render = function () {
 Picture.prototype.render2 = function () {
     let $picClone = $('#photo-template2').clone();
     $picClone.addClass(`${this.keyword}`)
-    $('main').append($picClone);
+    $('#picSection2').append($picClone);
     $picClone.find('#h2').text(this.title);
     $picClone.find('#img2').attr('src', this.url);
     $picClone.find('#p2').text(this.desc);
