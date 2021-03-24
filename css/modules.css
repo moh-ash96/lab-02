@@ -1,10 +1,15 @@
-#photo-template{
-    /* display: inline-block; */
+div{
     width: 20.33%;
-    float: left;
+    /* float: left; */
     text-align: center;
     margin-top: 50px;
     margin-left: 35px;
+    display: flex;
+    border: solid;
+    border-width: thick;
+    border-color: darkblue;
+    /* justify-content: center; */
+    flex-direction: column;
 }
 img{
     width: 300px;
@@ -19,4 +24,16 @@ h2{
 p{
     font-size: 30px;
     /* clear: both; */
+}
+#photo-template{
+    display: none;
+    border: none;
+}
+
+#photo-template2{
+    display: none;
+    border: none;
+}
+.betternet-wrapper{
+    display: none;
 }
