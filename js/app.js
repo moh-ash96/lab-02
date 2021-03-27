@@ -7,14 +7,18 @@ let picId = 1;
 let horns2 = [];
 
 
-let templateId = '#picTemplate';
-function Picture(title, url, desc, keyword, horns) {
-    this.title = title;
-    this.url = url;
-    this.desc = desc;
-    this.keyword = keyword;
-    this.horns = horns;
-    this.id = (picId++);
+let templateId = $('#picTemplate');
+
+function Picture(item) {
+    // this.title = title;
+    // this.image_url = image_url;
+    // this.description = description;
+    // this.keyword = keyword;
+    // this.horns = horns;
+    // this.id = (picId++);
+    for (let i in items){
+      this[i] = items[i];
+    }
     // pictures.push(this);
 }
 
@@ -39,11 +43,11 @@ Picture.prototype.render = function () {
     $picClone.attr('id', this.id);
     
 };
-// Picture.prototype.toHTML = function (){
-//     let template = $(templateId).html();
-//     let html = Mustache.render(template, this);
-//     return html;
-// }
+Picture.prototype.toHTML = function (){
+    let template = $(templateId).html();
+    let html = Mustache.render(template, this);
+    return html;
+}
 
 Picture.prototype.render2 = function () {
     let $picClone = $('#photo-template2').clone();
@@ -72,7 +76,7 @@ Picture.readJson = () => {
     $.ajax('./data/page-1.json', ajaxSettings) 
     .then(data => {
             data.forEach(item => {
-                hornObject = new Picture(item.title, item.image_url, item.description, item.keyword, item.horns);
+                hornObject = new Picture(items);
                 
                 if(filters.includes(item.keyword) === false){
                     filters.push(item.keyword);
@@ -89,13 +93,13 @@ Picture.readJson = () => {
     };
 
 
-    // pictureDataSet.forEach(pictureObject => {
-    //     pictures.push(new Picture(pictureObject));
-    // });
+    pictureDataSet.forEach(pictureObject => {
+        pictures.push(new Picture(pictureObject));
+    });
 
-    // pictures.forEach(ourNewPictureObject => {
-    //     $('#picSection').append(ourNewPictureObject.toHtml());
-    // });
+    pictures.forEach(ourNewPictureObject => {
+        $('#picSection').append(ourNewPictureObject.toHtml());
+    });
    
     $('#b1').click (() => Picture.readJson());
 

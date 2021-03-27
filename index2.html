@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gallery of Horns</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/modules.css">
+    <link rel="stylesheet" href="css/layouts.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Shadows+Into+Light&display=swap"
+        rel="stylesheet">
+
+        <template id="template" type="text/x-tmpl-mustache">
+            <div class="{{keyword}}" id="card-div">
+                <h2>{{title}}</h2>
+                <img src="{{image_url}}" alt="{{title}}">
+                <p>{{description}}</p>
+            </div>
+            </template>
+</head>
+<body>
+    <header>
+        <h1>The Gallery of Horns</h1>
+            <!-- <div id="select-div"> -->
+                <label for="sort-title">Sort By Name</label>
+                <input type="Radio" name="sort" id="sort-tilte" value="title" >
+                <label for="sort-horns">Sort By Number Of Horns</label>
+                <input type="Radio" name="sort" id="sort-horns" value="horns">
+            <form action="" id="select">
+                <select id="my-select">
+                    <option value="default" class="option">Filter by Keyword</option>
+                </select>
+            </form>
+            <nav id="pages">            
+            <ul id="ul-buttons">
+                <li><button id="b1">1</button></li>
+                <li><button id="b2">2</button></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="picSection" >
+        <!-- <div id="photo-template" >
+           
+        </div> -->
+    </section>
+
+    <footer>
+        &copy; 2021 Code Fellows
+    </footer>
+    
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="js/app2.js"></script>
+</html>
