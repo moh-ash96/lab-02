@@ -16,15 +16,26 @@ h1 {
 #picSection{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
-#picSection2{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
+
 #ul-buttons{
     display: flex;
     justify-content: center;
+    margin-left: 5%;
     
+}
+
+#sort-sect{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    margin-top: 2%;
+    font-size: 26px;
+}
+label{
+    margin-left: 8%;
+}
+input{
+    margin-right: 8%;
 }

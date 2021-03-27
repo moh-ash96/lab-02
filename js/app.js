@@ -1,152 +1,172 @@
 'use strict'
 
 let filters = [];
-let selected;
-let horns = [];
-let picId = 1;
-let horns2 = [];
 
-
-let templateId = '#picTemplate';
-function Picture(title, url, desc, keyword, horns) {
-    this.title = title;
-    this.url = url;
-    this.desc = desc;
-    this.keyword = keyword;
-    this.horns = horns;
-    this.id = (picId++);
-    // pictures.push(this);
+function Picture(items) {
+    for (let i in items) {
+        this[i] = items[i];
+    }
 }
 
-// function Picture(rawDataObject) {
-    
-//     for (let elements in rawDataObject){
-//         this[elements] = rawDataObject[elements];
-//     }
-//     this.id = (picId++);
-//     pictures.push(this);
-// }
 
+function compare(a, b) {
+    const picA = a.title.toUpperCase();
+    const picB = b.title.toUpperCase();
 
+    let comparison = 0;
+    if (picA > picB) {
+        comparison = 1;
+    } else if (picA < picB) {
+        comparison = -1;
+    }
+    return comparison;
+}
 
-Picture.prototype.render = function () {
-    let $picClone = $('#photo-template').clone();
-    $picClone.addClass(`${this.keyword}`)
-    $('#picSection').append($picClone);
-    $picClone.find('h2').text(this.title);
-    $picClone.find('img').attr('src', this.url);
-    $picClone.find('p').text(this.desc);
-    $picClone.attr('id', this.id);
-    
-};
-// Picture.prototype.toHTML = function (){
-//     let template = $(templateId).html();
-//     let html = Mustache.render(template, this);
-//     return html;
-// }
+function compareHorn(a, b) {
+    const picA = a.horns;
+    const picB = b.horns;
 
-Picture.prototype.render2 = function () {
-    let $picClone = $('#photo-template2').clone();
-    $picClone.addClass(`${this.keyword}`)
-    $('#picSection2').append($picClone);
-    $picClone.find('#h2').text(this.title);
-    $picClone.find('#img2').attr('src', this.url);
-    $picClone.find('#p2').text(this.desc);
-    $picClone.attr('id', this.id);
-    
-};
+    let comparison = 0;
+    if (picA > picB) {
+        comparison = 1;
+    } else if (picA < picB) {
+        comparison = -1;
+    }
+    return comparison;
+}
 
+let pictrueItems = [];
 
 const ajaxSettings = {
     method: 'get',
     dataType: 'json'
 };
 
-let hornObject = [];
+function sorting() {
+    $("input[type='radio'").click(function () {
+        let radioc = $("input[name='sort']:checked").val();
+        if (radioc == 'title') {
+            $('#picSection').empty();
+            pictrueItems.sort(compare);
 
-// let pictureDataSet = [];
+            pictrueItems.forEach(newObj => {
 
-Picture.readJson = () => {
+                const template = $('#template').html();
 
-    // pictureDataSet.push($.ajax('./data/page-1.json', ajaxSettings));
-    $.ajax('./data/page-1.json', ajaxSettings) 
-    .then(data => {
-            data.forEach(item => {
-                hornObject = new Picture(item.title, item.image_url, item.description, item.keyword, item.horns);
-                
-                if(filters.includes(item.keyword) === false){
-                    filters.push(item.keyword);
-                    $('select').append(`<option value="${item.keyword}"> ${item.keyword}></option>`);
-                }
-                horns.push(hornObject);
-                hornObject.render();
+                const html = Mustache.render(template, newObj);
+
+                $('#picSection').append(html);
             });
-            
+
+        } else if (radioc == 'horns') {
+            $('#picSection').empty();
+            pictrueItems.sort(compareHorn);
+
+            pictrueItems.forEach(newObj => {
+
+                const template = $('#template').html();
+
+                const html = Mustache.render(template, newObj);
+
+                $('#picSection').append(html);
+            });
+
+        }
+    })
+}
+
+
+
+$(function () {
+    $.ajax('data/page-1.json', ajaxSettings).then(data => {
+        data.forEach(items => {
+
+            let newItem = new Picture(items);
+            pictrueItems.push(newItem);
+
+            if (filters.includes(items.keyword) == false) {
+                filters.push(items.keyword);
+                $('#my-select').append(`<option value = "${items.keyword}" class = "opt">${items.keyword}</option>`);
+            };
+            const template = $('#template').html();
+
+            const html = Mustache.render(template, items);
+
+            $('#picSection').append(html);
         });
-        // console.log($.ajax('./data/page-1.json', ajaxSettings));
-        // console.log(ajax1);
-        hornObject = [];
-    };
 
+        sorting();
+    })
+    $('#b1').on('click', (event) => {
+        event.preventDefault();
+        filters = [];
+        pictrueItems = [];
+        $('.opt').remove();
+        $('#picSection').empty();
+        $.ajax('data/page-1.json', ajaxSettings).then(data => {
+            data.forEach(items => {
 
-    // pictureDataSet.forEach(pictureObject => {
-    //     pictures.push(new Picture(pictureObject));
-    // });
+                let newItem = new Picture(items);
+                pictrueItems.push(newItem);
 
-    // pictures.forEach(ourNewPictureObject => {
-    //     $('#picSection').append(ourNewPictureObject.toHtml());
-    // });
-   
-    $('#b1').click (() => Picture.readJson());
+                if (filters.includes(items.keyword) == false) {
+                    filters.push(items.keyword);
+                    $('#my-select').append(`<option value = "${items.keyword}" class = "opt">${items.keyword}</option>`);
+                };
+                const template = $('#template').html();
 
+                const html = Mustache.render(template, items);
 
-// let hornObject2;
+                $('#picSection').append(html);
+            });
 
-Picture.readJson2 = () => {
-    $.ajax('./data/page-2.json', ajaxSettings)
-    .then(data => {
-        data.forEach(item => {
-            hornObject = new Picture(item.title, item.image_url, item.description, item.keyword, item.horns);
-            
-            if(filters.includes(item.keyword) === false){
-                filters.push(item.keyword);
-                $('select').append(`<option value="${item.keyword}"> ${item.keyword}></option>`);
-            }
-            hornObject.render2();
-            
-            horns2.push(hornObject);
+            sorting();
+
         });
-        // $(`#${hornObject2.id}`).css('display', 'inline-block');
+
     });
-    // $('#picSection').empty();
-        
-};
-
-$('#b2').click (() => Picture.readJson2());
+});
 
 
-$(document).ready(function () {
+$(function () {
+    $('#b2').on('click', (event) => {
+        event.preventDefault();
+        filters = [];
+        pictrueItems = [];
+        $('.opt').remove();
+        $('#picSection').empty();
+        $.ajax('data/page-2.json', ajaxSettings).then(data => {
+            data.forEach(items => {
+                let newItem = new Picture(items);
+                pictrueItems.push(newItem);
 
-    $('#my-select').change(function () {
-      if ($(this).val() === 'default') {
-        $('.card-div').show();
-      } else {
-        $('.card-div').hide();
+                if (filters.includes(items.keyword) == false) {
+                    filters.push(items.keyword);
+                    $('#my-select').append(`<option value = "${items.keyword}" class = "opt">${items.keyword}</option>`);
+                };
+
+                const template = $('#template').html();
+
+                const html = Mustache.render(template, items);
+
+                $('#picSection').append(html);
+
+            });
+
+            sorting();
+
+        })
+    })
+})
+
+
+
+
+$('#my-select').change(function () {
+    if ($(this).val() === 'default') {
+        $('div').show();
+    } else {
+        $('div').hide();
         $('.' + $(this).val()).show();
-      }
-    });
-  
-  });
-
-  $(document).ready(function () {
-
-    $('#my-select').change(function () {
-      if ($(this).val() === 'default') {
-        $('.card-div2').show();
-      } else {
-        $('.card-div2').hide();
-        $('.' + $(this).val()).show();
-      }
-    });
-  
+    }
 });

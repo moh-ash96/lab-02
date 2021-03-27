@@ -15,11 +15,11 @@ Number and name of feature: Feature #2: Filter images
 
 Estimate of time needed to complete: 1:30 hours
 
-Start time: 3:30
+Start time: 10:00 pm
 
-Finish time: not finished yet
+Finish time: 4:00 am
 
-Actual time needed to complete: infinity
+Actual time needed to complete: 6 hours
 
 
 
@@ -34,3 +34,14 @@ Finish time: 9:15
 Actual time needed to complete: 30 minutes
 
 
+
+
+Number and name of feature: Feature 4: Sort the images
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 12:00 pm
+
+Finish time: 12:45 pm
+
+Actual time needed to complete: 45 minutes
