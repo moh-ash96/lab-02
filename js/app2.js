@@ -22,6 +22,19 @@ function compare(a, b) {
     return comparison;
 }
 
+function compareHorn(a, b) {
+    const picA = a.horns;
+    const picB = b.horns;
+
+    let comparison = 0;
+    if (picA > picB) {
+        comparison = 1;
+    } else if (picA < picB) {
+        comparison = -1;
+    }
+    return comparison;
+}
+
 let pictrueItems = [];
 const ajaxSettings = {
     method: 'get',
@@ -71,6 +84,19 @@ $(function () {
                         $('#picSection').append(html);
                     });
                     
+                } else if(radioc == 'horns'){
+                    $('#picSection').empty();
+                    pictrueItems.sort(compareHorn);
+
+                    pictrueItems.forEach(newObj => {
+        
+                        const template = $('#template').html();
+        
+                        const html = Mustache.render(template, newObj);
+        
+                        $('#picSection').append(html);
+                    });
+
                 }
             })
 
@@ -78,7 +104,6 @@ $(function () {
 
     });
 });
-
 
 
 $(function () {
@@ -104,6 +129,37 @@ $(function () {
 
                 $('#picSection').append(html);
 
+            })
+            $("input[type='radio'").click(function () {
+                let radioc = $("input[name='sort']:checked").val();
+                console.log(radioc);
+                if(radioc == 'title'){
+                    $('#picSection').empty();
+                    pictrueItems.sort(compare);
+
+                    pictrueItems.forEach(newObj => {
+        
+                        const template = $('#template').html();
+        
+                        const html = Mustache.render(template, newObj);
+        
+                        $('#picSection').append(html);
+                    });
+                    
+                } else if(radioc == 'horns'){
+                    $('#picSection').empty();
+                    pictrueItems.sort(compareHorn);
+
+                    pictrueItems.forEach(newObj => {
+        
+                        const template = $('#template').html();
+        
+                        const html = Mustache.render(template, newObj);
+        
+                        $('#picSection').append(html);
+                    });
+
+                }
             })
 
         })
